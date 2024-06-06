@@ -142,7 +142,8 @@ return {
                 --
                 -- But for many setups, the LSP (`tsserver`) will work just fine
                 tsserver = {},
-                --
+                terraformls = {},
+                taplo = {}, -- TOML
 
                 lua_ls = {
                     -- cmd = {...},

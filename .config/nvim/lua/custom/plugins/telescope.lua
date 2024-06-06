@@ -22,6 +22,8 @@ return {
 
             -- Useful for getting pretty icons, but requires a Nerd Font.
             { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+
+            { 'nvim-telescope/telescope-file-browser.nvim', enabled = true },
         },
         config = function()
             -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -54,10 +56,20 @@ return {
                 --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
                 --   },
                 -- },
-                -- pickers = {}
+                -- pickers = {},
                 extensions = {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown(),
+                    },
+                    ['file_browser'] = {
+                        path = '%:p:h', -- open from within the folder of your current buffer
+                        display_stat = false, -- don't show file stat
+                        grouped = true, -- group initial sorting by directories and then files
+                        hidden = true, -- show hidden files
+                        hide_parent_dir = true, -- hide `../` in the file browser
+                        hijack_netrw = true, -- use telescope file browser when opening directory paths
+                        prompt_path = true, -- show the current relative path from cwd as the prompt prefix
+                        use_fd = true, -- use `fd` instead of plenary, make sure to install `fd`
                     },
                 },
             }
@@ -65,6 +77,9 @@ return {
             -- Enable Telescope extensions if they are installed
             pcall(require('telescope').load_extension, 'fzf')
             pcall(require('telescope').load_extension, 'ui-select')
+
+            require('telescope').load_extension 'file_browser'
+            vim.keymap.set('n', '-', ':Telescope file_browser<CR>')
 
             -- See `:help telescope.builtin`
             local builtin = require 'telescope.builtin'
@@ -78,6 +93,7 @@ return {
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
             vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
             vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+            vim.keymap.set('n', '<leader>sl', builtin.git_files, { desc = '[S]earch [l]s (git ls-files)' })
 
             -- Slightly advanced example of overriding default behavior and theme
             vim.keymap.set('n', '<leader>/', function()

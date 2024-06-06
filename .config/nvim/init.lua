@@ -6,6 +6,8 @@ vim.g.maplocalleader = ' '
 
 vim.g.have_nerd_font = true
 
+vim.g.editorconfig = true
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 require 'custom.options'

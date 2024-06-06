@@ -26,6 +26,9 @@ return {
             end,
             formatters_by_ft = {
                 lua = { 'stylua' },
+                jsonc = { 'jq' },
+                json = { 'jq' },
+                yaml = { 'yq' },
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },
                 --

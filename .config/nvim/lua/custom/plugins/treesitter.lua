@@ -2,8 +2,47 @@ return {
     { -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
+        dependencies = {
+            -- { 'nvim-treesitter/nvim-treesitter-textobjects' },
+            {
+                'nvim-treesitter/nvim-treesitter-context', -- Show code context
+                opts = {
+                    enable = true, -- Enable this plugin
+                    mode = 'cursor', -- 'cursor' or 'topline'
+                    line_numbers = true, -- show line numbers
+                    multiline_threshold = 1, -- How many lines the window should span. Values <= 0 mean no limit
+                    max_lines = 10, -- Maximum number of lines to show for a single context
+                },
+            },
+        },
         opts = {
-            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'rust', 'typescript', 'hcl', 'terraform' },
+            ensure_installed = {
+                'bash',
+                'c',
+                'csv',
+                'diff',
+                'dockerfile',
+                'gitignore',
+                'go',
+                'gomod',
+                'gosum',
+                'hcl',
+                'html',
+                'javascript',
+                'lua',
+                'luadoc',
+                'markdown',
+                'proto',
+                'python',
+                'rego',
+                'rust',
+                'sql',
+                'typescript',
+                'terraform',
+                'vim',
+                'vimdoc',
+                'yaml',
+            },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {

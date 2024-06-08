@@ -29,6 +29,7 @@ return {
                 jsonc = { 'jq' },
                 json = { 'jq' },
                 yaml = { 'yq' },
+                toml = { 'taplo' },
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },
                 --

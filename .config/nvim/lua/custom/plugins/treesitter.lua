@@ -37,6 +37,7 @@ return {
                 'rego',
                 'rust',
                 'sql',
+                'toml',
                 'typescript',
                 'terraform',
                 'vim',

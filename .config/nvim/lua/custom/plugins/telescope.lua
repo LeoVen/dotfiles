@@ -97,12 +97,21 @@ return {
             vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
             vim.keymap.set('n', '<leader>sl', builtin.git_files, { desc = '[S]earch [l]s (git ls-files)' })
 
-            vim.keymap.set('n', '<leader>sa', function()
+            vim.keymap.set('n', '<leader>sF', function()
                 builtin.find_files {
                     hidden = true,
                     prompt_title = 'Find All Files',
                 }
-            end, { desc = '[S]earch [A]ll Files' })
+            end, { desc = '[S]earch All [F]iles' })
+
+            vim.keymap.set('n', '<leader>sG', function()
+                builtin.live_grep {
+                    additional_args = function(_)
+                        return { '--hidden' }
+                    end,
+                    prompt_title = 'Find All by Grep',
+                }
+            end, { desc = '[S]earch All [G]rep' })
 
             -- Slightly advanced example of overriding default behavior and theme
             vim.keymap.set('n', '<leader>/', function()

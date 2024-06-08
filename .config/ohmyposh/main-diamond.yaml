@@ -1,0 +1,145 @@
+---
+"$schema": https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 2
+final_space: true
+console_title_template: " {{ .Shell }} in {{ .Folder }}"
+
+blocks:
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: os
+        style: diamond
+        background: "p:os"
+        foreground: "p:base"
+        template: " {{ .Icon }} {{ .UserName }} "
+        trailing_diamond: ""
+      - type: shell
+        style: diamond
+        background: "p:term"
+        foreground: "p:base"
+        template: "  {{ .Name }} "
+        leading_diamond: "<transparent,p:term></>"
+        trailing_diamond: ""
+      - type: shell
+        style: diamond
+        background: "p:dir"
+        foreground: "p:base"
+        template: "  "
+        leading_diamond: "<transparent,p:dir></>"
+        trailing_diamond: ""
+      - type: path
+        style: diamond
+        background: "p:dir"
+        foreground: "p:base"
+        template: "{{ .PWD }} "
+        trailing_diamond: ""
+      - type: git
+        style: diamond
+        background: "p:git"
+        foreground: "p:base"
+        leading_diamond: "<transparent,p:git></>"
+        trailing_diamond: ""
+        properties:
+          branch_icon: " "
+          commit_icon: "@"
+          fetch_stash_count: true
+          fetch_status: true
+          fetch_upstream_icon: true
+          fetch_worktree_count: true
+        template: " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus
+          }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and
+          (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} 
+          {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{
+          end }} "
+
+  - type: 'prompt'
+    alignment: right
+    newline: false
+    filler: "<p:text,p:base></>"
+    segments:
+      - type: executiontime
+        style: diamond
+        background: "p:exec"
+        foreground: "p:base"
+        leading_diamond: " "
+        trailing_diamond: "<transparent,p:exec></>"
+        template: "  {{ .FormattedMs }} "
+        properties:
+          threshold: 0
+          style: roundrock
+      - type: time
+        style: diamond
+        background: "p:time"
+        foreground: "p:base"
+        leading_diamond: ""
+        template: " {{ .CurrentDate | date .Format }} "
+        properties:
+          time_format: '15:04'
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: status
+        style: plain
+        foreground: "p:cursor"
+        template: "❯ "
+        properties:
+          always_enabled: true
+
+
+transient_prompt:
+  foreground_templates:
+    - "{{if gt .Code 0}}p:red{{end}}"
+    - "{{if eq .Code 0}}p:green{{end}}"
+  background: transparent
+  template: "{{ .Code }} ❯ "
+
+
+secondary_prompt:
+  background: transparent
+  foreground: "p:cursor"
+  template: "❯❯ "
+
+
+palette:
+  rosewater: "#f5e0dc"
+  flamingo: "#f2cdcd"
+  pink: "#f5c2e7"
+  mauve: "#cba6f7"
+  red: "#f38ba8"
+  maroon: "#eba0ac"
+  peach: "#fab387"
+  yellow: "#f9e2af"
+  green: "#a6e3a1"
+  teal: "#94e2d5"
+  sky: "#89dceb"
+  sapphire: "#74c7ec"
+  blue: "#89b4fa"
+  lavender: "#b4befe"
+  text: "#cdd6f4"
+  subtext1: "#bac2de"
+  subtext0: "#a6adc8"
+  overlay2: "#9399b2"
+  overlay1: "#7f849c"
+  overlay0: "#6c7086"
+  surface2: "#585b70"
+  surface1: "#45475a"
+  surface0: "#313244"
+  base: "#1e1e2e"
+  mantle: "#181825"
+  crust: "#11111b"
+
+  # Segment colors
+  os: "p:yellow"
+  term: "p:blue"
+  dir: "p:blue"
+  git: "p:flamingo"
+  exec: "p:lavender"
+  time: "p:lavender"
+  cursor: "p:peach"
+

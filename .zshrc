@@ -24,10 +24,23 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
-zinit snippet https://raw.githubusercontent.com/rust-lang/cargo/master/src/etc/_cargo
-# zinit snippet OMZP::kubectl
-# zinit snippet OMZP::kubectx
-# zinit snippet OMZP::archlinux
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::npm
+zinit snippet OMZP::terraform
+zinit snippet OMZP::nvm
+
+# File completions
+zinit ice as'completion'; zinit snippet https://raw.githubusercontent.com/rust-lang/cargo/master/src/etc/_cargo
+
+# Manual completions
+mkdir -p ~/.zfunc
+fpath+=~/.zfunc
+
+# TODO this needs to run only once
+if ! [ -x "$(command -v rustup)" ]; then
+  rustup completions zsh > ~/.zfunc/_rustup
+fi
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -66,10 +79,16 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Shell Integrations
 eval "$(fzf --zsh)"
 
+# NVM
+export NVM_COMPLETION=true
+export NVM_SYMLINK_CURRENT="true"
+zinit wait lucid light-mode for lukechilds/zsh-nvm
+
 export CARGO_BUILD_TARGET_DIR=~/.target
 
 alias dc="docker compose"
 alias lg="lazygit"
-alias ls="lsd"
+# alias ls="lsd"
+alias ls="eza"
 alias la="ls -lah"
 

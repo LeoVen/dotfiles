@@ -19,5 +19,9 @@ return {
         -- See `:help ibl`
         main = 'ibl',
         opts = {},
+        config = function()
+            -- Add configurations here
+            require('ibl').setup {}
+        end,
     },
 }

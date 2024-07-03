@@ -144,6 +144,7 @@ return {
                 pyright = {},
                 clangd = {},
                 gopls = {},
+                tailwindcss = {},
                 jsonls = {
                     filetypes = { 'json', 'jsonc' },
                     settings = {

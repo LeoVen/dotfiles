@@ -44,7 +44,7 @@ require('lazy').setup({
 
     { import = 'custom.plugins' },
 
-    require 'custom.lsp.lspconfig',
+    require 'custom.lsp.init',
 
     require 'custom.themes',
 }, {

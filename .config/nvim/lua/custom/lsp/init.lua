@@ -131,12 +131,7 @@ return {
             --  - settings (table): Override the default settings passed when initializing the server.
             --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
             local servers = {
-                -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-                --
-                -- Some languages (like typescript) have entire language plugins that can be useful:
-                --    https://github.com/pmizio/typescript-tools.nvim
-                --
-                -- But for many setups, the LSP (`tsserver`) will work just fine
+                -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 tsserver = {},
                 rust_analyzer = {},
                 terraformls = {},
@@ -145,79 +140,8 @@ return {
                 clangd = {},
                 gopls = {},
                 tailwindcss = {},
-                jsonls = {
-                    filetypes = { 'json', 'jsonc' },
-                    settings = {
-                        json = {
-                            -- Schemas https://www.schemastore.org
-                            schemas = {
-                                {
-                                    fileMatch = { 'package.json' },
-                                    url = 'https://json.schemastore.org/package.json',
-                                },
-                                {
-                                    fileMatch = { 'tsconfig*.json' },
-                                    url = 'https://json.schemastore.org/tsconfig.json',
-                                },
-                                {
-                                    fileMatch = {
-                                        '.prettierrc',
-                                        '.prettierrc.json',
-                                        'prettier.config.json',
-                                    },
-                                    url = 'https://json.schemastore.org/prettierrc.json',
-                                },
-                                {
-                                    fileMatch = { '.eslintrc', '.eslintrc.json' },
-                                    url = 'https://json.schemastore.org/eslintrc.json',
-                                },
-                                {
-                                    fileMatch = { '.babelrc', '.babelrc.json', 'babel.config.json' },
-                                    url = 'https://json.schemastore.org/babelrc.json',
-                                },
-                                {
-                                    fileMatch = { 'lerna.json' },
-                                    url = 'https://json.schemastore.org/lerna.json',
-                                },
-                                {
-                                    fileMatch = { 'now.json', 'vercel.json' },
-                                    url = 'https://json.schemastore.org/now.json',
-                                },
-                                {
-                                    fileMatch = {
-                                        '.stylelintrc',
-                                        '.stylelintrc.json',
-                                        'stylelint.config.json',
-                                    },
-                                    url = 'http://json.schemastore.org/stylelintrc.json',
-                                },
-                            },
-                        },
-                    },
-                },
-                yamlls = {
-                    schemaStore = {
-                        enable = true,
-                        url = 'https://www.schemastore.org/api/json/catalog.json',
-                    },
-                    schemas = {
-                        kubernetes = '*.yaml',
-                        ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*',
-                        ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
-                        ['http://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
-                        ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
-                        ['http://json.schemastore.org/kustomization'] = 'kustomization.{yml,yaml}',
-                        ['http://json.schemastore.org/ansible-playbook'] = '*play*.{yml,yaml}',
-                        ['http://json.schemastore.org/chart'] = 'Chart.{yml,yaml}',
-                        ['https://json.schemastore.org/dependabot-v2'] = '.github/dependabot.{yml,yaml}',
-                        ['https://json.schemastore.org/gitlab-ci'] = '*gitlab-ci*.{yml,yaml}',
-                        ['https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json'] = '*api*.{yml,yaml}',
-                        ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = '*docker-compose*.{yml,yaml}',
-                        ['https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json'] = '*flow*.{yml,yaml}',
-                    },
-                    completion = true,
-                    hover = true,
-                },
+                jsonls = require 'custom.lsp.jsonls',
+                yamlls = require 'custom.lsp.yamlls',
 
                 lua_ls = {
                     -- cmd = {...},

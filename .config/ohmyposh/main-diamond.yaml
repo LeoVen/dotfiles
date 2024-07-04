@@ -1,62 +1,53 @@
----
-"$schema": https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 version: 2
 final_space: true
-console_title_template: " {{ .Shell }} in {{ .Folder }}"
-
+console_title_template: ' {{ .Shell }} in {{ .Folder }}'
 blocks:
-
   - type: prompt
     alignment: left
     newline: true
     segments:
       - type: os
         style: diamond
-        background: "p:os"
-        foreground: "p:base"
-        template: " {{ .Icon }} {{ .UserName }} "
-        trailing_diamond: ""
+        background: p:os
+        foreground: p:base
+        template: ' {{ .Icon }} {{ .UserName }} '
+        trailing_diamond: 
       - type: shell
         style: diamond
-        background: "p:term"
-        foreground: "p:base"
-        template: "  {{ .Name }} "
-        leading_diamond: "<transparent,p:term></>"
-        trailing_diamond: ""
+        background: p:term
+        foreground: p:base
+        template: '  {{ .Name }} '
+        leading_diamond: <transparent,p:term></>
+        trailing_diamond: 
       - type: shell
         style: diamond
-        background: "p:dir"
-        foreground: "p:base"
-        template: "  "
-        leading_diamond: "<transparent,p:dir></>"
-        trailing_diamond: ""
+        background: p:dir
+        foreground: p:base
+        template: '  '
+        leading_diamond: <transparent,p:dir></>
+        trailing_diamond: 
       - type: path
         style: diamond
-        background: "p:dir"
-        foreground: "p:base"
-        template: "{{ .PWD }} "
-        trailing_diamond: ""
+        background: p:dir
+        foreground: p:base
+        template: '{{ .PWD }} '
+        trailing_diamond: 
       - type: git
         style: diamond
-        background: "p:git"
-        foreground: "p:base"
-        leading_diamond: "<transparent,p:git></>"
-        trailing_diamond: ""
+        background: p:git
+        foreground: p:base
+        leading_diamond: <transparent,p:git></>
+        trailing_diamond: 
         properties:
-          branch_icon: " "
-          commit_icon: "@"
+          branch_icon: ' '
+          commit_icon: '@'
           fetch_stash_count: true
           fetch_status: true
           fetch_upstream_icon: true
           fetch_worktree_count: true
-        template: " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus
-          }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and
-          (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} 
-          {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{
-          end }} "
-
-  - type: "rprompt"
+        template: ' {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} '
+  - type: rprompt
     alignment: right
     overflow: hide
     newline: false
@@ -64,156 +55,179 @@ blocks:
       - type: go
         style: plain
         background: transparent
-        foreground: "p:sky"
-        template: "  {{ .Full }}"
+        foreground: p:sky
+        template: '  {{ .Full }} '
       - type: rust
         style: plain
         background: transparent
-        foreground: "p:peach"
-        template: "  {{ .Full }}"
+        foreground: p:peach
+        template: '  {{ .Full }} '
       - type: node
         style: plain
         background: transparent
-        foreground: "p:green"
-        template: "  {{ .Full }}"
-      - type: node
+        foreground: p:green
+        template: '  {{ .Full }} '
+      - type: python
         style: plain
         background: transparent
-        foreground: "p:green"
-        template: "  {{ .Full }} "
-
-
-  - type: "prompt"
+        foreground: p:teal
+        template: '  {{ .Full }} '
+      - type: terraform
+        style: plain
+        background: transparent
+        foreground: p:lavender
+        template: '  {{ .WorkspaceName }}{{ if .Version }} {{ .Version }}{{ end }} '
+      - type: aws
+        style: plain
+        background: transparent
+        foreground: p:yellow
+        template: '{{ if ne .Profile "default" }} {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}{{ end }} '
+  - type: prompt
     alignment: right
     overflow: hide
     newline: false
     segments:
       - type: executiontime
         style: diamond
-        background: "p:exec"
-        foreground: "p:base"
-        leading_diamond: " "
-        trailing_diamond: "<transparent,p:exec></>"
-        template: "  {{ .FormattedMs }} "
+        background: p:exec
+        foreground: p:base
+        leading_diamond: ' '
+        trailing_diamond: <transparent,p:exec></>
+        template: '  {{ .FormattedMs }} '
         properties:
           threshold: 0
           style: roundrock
       - type: time
         style: diamond
-        background: "p:time"
-        foreground: "p:base"
-        leading_diamond: ""
-        template: " {{ .CurrentDate | date .Format }} "
+        background: p:time
+        foreground: p:base
+        leading_diamond: 
+        template: ' {{ .CurrentDate | date .Format }} '
         properties:
-          time_format: "15:04"
-
+          time_format: 15:04
   - type: prompt
     alignment: left
     newline: true
     segments:
       - type: status
         style: plain
-        foreground: "p:cursor"
-        template: "❯ "
+        foreground: p:cursor
+        template: '❯ '
         properties:
           always_enabled: true
-
-
 tooltips:
   - type: go
     style: diamond
     background: transparent
-    foreground: "p:sky"
-    template: "  {{ .Full }}"
+    foreground: p:sky
+    template: '  {{ .Full }}'
     tips:
       - go
     properties:
       display_mode: always
-
   - type: rust
     style: diamond
     background: transparent
-    foreground: "p:peach"
-    template: "  {{ .Full }}"
+    foreground: p:peach
+    template: '  {{ .Full }}'
     tips:
       - cargo
       - rustc
       - rustup
     properties:
       display_mode: always
-
   - type: node
     style: plain
     background: transparent
-    foreground: "p:green"
-    template: "  {{ .Full }}"
+    foreground: p:green
+    template: '  {{ .Full }}'
     tips:
       - npm
       - npx
       - node
     properties:
       display_mode: always
-
   - type: python
     style: plain
     background: transparent
-    foreground: "p:green"
-    template: "  {{ .Full }} "
+    foreground: p:teal
+    template: '  {{ .Full }} '
     tips:
       - python3
       - python
     properties:
       display_mode: always
-
-
+  - type: terraform
+    style: plain
+    background: transparent
+    foreground: p:lavender
+    template: '  {{ .WorkspaceName }}{{ if .Version }} {{ .Version }}{{ end }}'
+    tips:
+      - terraform
+      - tf
+    properties:
+      display_mode: always
+  - type: aws
+    style: plain
+    background: transparent
+    foreground: p:yellow
+    template: ' {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} '
+    tips:
+      - aws
+    properties:
+      display_mode: always
+  - type: text
+    style: plain
+    background: transparent
+    foreground: p:blue
+    template: '  docker '
+    tips:
+      - docker
+      - dc
+    properties:
+      display_mode: always
 transient_prompt:
   foreground_templates:
-    - "{{if gt .Code 0}}p:red{{end}}"
-    - "{{if eq .Code 0}}p:green{{end}}"
+    - '{{if gt .Code 0}}p:red{{end}}'
+    - '{{if eq .Code 0}}p:green{{end}}'
   background: transparent
-  template: "{{ .Code }} ❯ "
-
-
+  template: '{{ .Code }} ❯ '
 secondary_prompt:
   background: transparent
-  foreground: "p:cursor"
-  template: "❯❯ "
-
-
+  foreground: p:cursor
+  template: '❯❯ '
 palette:
-  rosewater: "#f5e0dc"
-  flamingo: "#f2cdcd"
-  pink: "#f5c2e7"
-  mauve: "#cba6f7"
-  red: "#f38ba8"
-  maroon: "#eba0ac"
-  peach: "#fab387"
-  yellow: "#f9e2af"
-  green: "#a6e3a1"
-  teal: "#94e2d5"
-  sky: "#89dceb"
-  sapphire: "#74c7ec"
-  blue: "#89b4fa"
-  lavender: "#b4befe"
-  text: "#cdd6f4"
-  subtext1: "#bac2de"
-  subtext0: "#a6adc8"
-  overlay2: "#9399b2"
-  overlay1: "#7f849c"
-  overlay0: "#6c7086"
-  surface2: "#585b70"
-  surface1: "#45475a"
-  surface0: "#313244"
-  base: "#1e1e2e"
-  mantle: "#181825"
-  crust: "#11111b"
-
+  rosewater: '#f5e0dc'
+  flamingo: '#f2cdcd'
+  pink: '#f5c2e7'
+  mauve: '#cba6f7'
+  red: '#f38ba8'
+  maroon: '#eba0ac'
+  peach: '#fab387'
+  yellow: '#f9e2af'
+  green: '#a6e3a1'
+  teal: '#94e2d5'
+  sky: '#89dceb'
+  sapphire: '#74c7ec'
+  blue: '#89b4fa'
+  lavender: '#b4befe'
+  text: '#cdd6f4'
+  subtext1: '#bac2de'
+  subtext0: '#a6adc8'
+  overlay2: '#9399b2'
+  overlay1: '#7f849c'
+  overlay0: '#6c7086'
+  surface2: '#585b70'
+  surface1: '#45475a'
+  surface0: '#313244'
+  base: '#1e1e2e'
+  mantle: '#181825'
+  crust: '#11111b'
   # Segment colors
-  os: "p:yellow"
-  term: "p:blue"
-  dir: "p:blue"
-  git: "p:flamingo"
-  exec: "p:lavender"
-  time: "p:lavender"
-  cursor: "p:peach"
-
+  os: p:yellow
+  term: p:blue
+  dir: p:blue
+  git: p:flamingo
+  exec: p:lavender
+  time: p:lavender
+  cursor: p:peach

@@ -137,7 +137,9 @@ return {
                 terraformls = {},
                 taplo = {},
                 pyright = {},
-                clangd = {},
+                clangd = {
+                    filetypes = { 'c', 'cpp' },
+                },
                 gopls = {},
                 tailwindcss = {},
                 jsonls = require 'custom.lsp.jsonls',

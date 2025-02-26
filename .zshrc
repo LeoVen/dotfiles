@@ -10,7 +10,10 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
+# Linux
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+# MacOS
+export PATH=$PATH:/opt/homebrew/bin
 export PATH=/snap/bin/:$PATH
 
 # Add in zsh plugins
@@ -91,4 +94,3 @@ alias lg="lazygit"
 # alias ls="lsd"
 alias ls="eza"
 alias la="ls -lah"
-

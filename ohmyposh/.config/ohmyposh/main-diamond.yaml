@@ -1,0 +1,255 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+palette:
+  base: "#1e1e2e"
+  blue: "#89b4fa"
+  crust: "#11111b"
+  cursor: p:peach
+  dir: p:blue
+  exec: p:lavender
+  flamingo: "#f2cdcd"
+  git: p:flamingo
+  green: "#a6e3a1"
+  lavender: "#b4befe"
+  mantle: "#181825"
+  maroon: "#eba0ac"
+  mauve: "#cba6f7"
+  os: p:yellow
+  overlay0: "#6c7086"
+  overlay1: "#7f849c"
+  overlay2: "#9399b2"
+  peach: "#fab387"
+  pink: "#f5c2e7"
+  red: "#f38ba8"
+  rosewater: "#f5e0dc"
+  sapphire: "#74c7ec"
+  sky: "#89dceb"
+  subtext0: "#a6adc8"
+  subtext1: "#bac2de"
+  surface0: "#313244"
+  surface1: "#45475a"
+  surface2: "#585b70"
+  teal: "#94e2d5"
+  term: p:blue
+  text: "#cdd6f4"
+  time: p:lavender
+  yellow: "#f9e2af"
+secondary_prompt:
+  template: "❯❯ "
+  foreground: p:cursor
+  background: transparent
+transient_prompt:
+  template: "{{ .Code }} ❯ "
+  background: transparent
+  foreground_templates:
+  - "{{if gt .Code 0}}p:red{{end}}"
+  - "{{if eq .Code 0}}p:green{{end}}"
+console_title_template: " {{ .Shell }} in {{ .Folder }}"
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      cache_duration: none
+    trailing_diamond: 
+    template: " {{ .Icon }} {{ .UserName }} "
+    foreground: p:base
+    background: p:os
+    type: os
+    style: diamond
+  - properties:
+      cache_duration: none
+    leading_diamond: <transparent,p:term></>
+    trailing_diamond: 
+    template: " \uf489 {{ .Name }} "
+    foreground: p:base
+    background: p:term
+    type: shell
+    style: diamond
+  - properties:
+      cache_duration: none
+    leading_diamond: <transparent,p:dir></>
+    trailing_diamond: 
+    template: " \uf07b "
+    foreground: p:base
+    background: p:dir
+    type: shell
+    style: diamond
+  - properties:
+      cache_duration: none
+    trailing_diamond: 
+    template: "{{ .PWD }} "
+    foreground: p:base
+    background: p:dir
+    type: path
+    style: diamond
+  - properties:
+      branch_icon: "\ue725 "
+      cache_duration: none
+      commit_icon: "@"
+      fetch_stash_count: true
+      fetch_status: true
+      fetch_upstream_icon: true
+      fetch_worktree_count: true
+    leading_diamond: <transparent,p:git></>
+    trailing_diamond: 
+    template: " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uf0c7 {{ .StashCount }}{{ end }} "
+    foreground: p:base
+    background: p:git
+    type: git
+    style: diamond
+  newline: true
+- type: rprompt
+  alignment: right
+  overflow: hide
+  segments:
+  - properties:
+      cache_duration: none
+    template: " \ue627 {{ .Full }} "
+    foreground: p:sky
+    background: transparent
+    type: go
+    style: plain
+  - properties:
+      cache_duration: none
+    template: " \ue7a8 {{ .Full }} "
+    foreground: p:peach
+    background: transparent
+    type: rust
+    style: plain
+  - properties:
+      cache_duration: none
+    template: " \ue718 {{ .Full }} "
+    foreground: p:green
+    background: transparent
+    type: node
+    style: plain
+  - properties:
+      cache_duration: none
+    template: " \ue235 {{ .Full }} "
+    foreground: p:teal
+    background: transparent
+    type: python
+    style: plain
+  - properties:
+      cache_duration: none
+    template: " \ue69a {{ .WorkspaceName }}{{ if .Version }} {{ .Version }}{{ end }} "
+    foreground: p:lavender
+    background: transparent
+    type: terraform
+    style: plain
+  - properties:
+      cache_duration: none
+    template: "{{ if ne .Profile \"default\" }}\ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}{{ end }} "
+    foreground: p:yellow
+    background: transparent
+    type: aws
+    style: plain
+- type: prompt
+  alignment: right
+  overflow: hide
+  segments:
+  - properties:
+      cache_duration: none
+      style: roundrock
+      threshold: 0
+    leading_diamond: " \ue0b2"
+    trailing_diamond: <transparent,p:exec></>
+    template: " \uf252 {{ .FormattedMs }} "
+    foreground: p:base
+    background: p:exec
+    type: executiontime
+    style: diamond
+  - properties:
+      cache_duration: none
+      time_format: "15:04"
+    leading_diamond: 
+    template: "\uf017 {{ .CurrentDate | date .Format }} "
+    foreground: p:base
+    background: p:time
+    type: time
+    style: diamond
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      always_enabled: true
+      cache_duration: none
+    template: "❯ "
+    foreground: p:cursor
+    type: status
+    style: plain
+  newline: true
+tooltips:
+- properties:
+    display_mode: always
+  template: " \ue627 {{ .Full }}"
+  foreground: p:sky
+  background: transparent
+  type: go
+  style: diamond
+  tips:
+  - go
+- properties:
+    display_mode: always
+  template: " \ue7a8 {{ .Full }}"
+  foreground: p:peach
+  background: transparent
+  type: rust
+  style: diamond
+  tips:
+  - cargo
+  - rustc
+  - rustup
+- properties:
+    display_mode: always
+  template: " \ue718 {{ .Full }}"
+  foreground: p:green
+  background: transparent
+  type: node
+  style: plain
+  tips:
+  - npm
+  - npx
+  - node
+- properties:
+    display_mode: always
+  template: " \ue235 {{ .Full }} "
+  foreground: p:teal
+  background: transparent
+  type: python
+  style: plain
+  tips:
+  - python3
+  - python
+- properties:
+    display_mode: always
+  template: " \ue69a {{ .WorkspaceName }}{{ if .Version }} {{ .Version }}{{ end }}"
+  foreground: p:lavender
+  background: transparent
+  type: terraform
+  style: plain
+  tips:
+  - terraform
+  - tf
+- properties:
+    display_mode: always
+  template: "\ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} "
+  foreground: p:yellow
+  background: transparent
+  type: aws
+  style: plain
+  tips:
+  - aws
+- properties:
+    display_mode: always
+  template: " \uf308 docker "
+  foreground: p:blue
+  background: transparent
+  type: text
+  style: plain
+  tips:
+  - docker
+  - dc
+version: 3
+final_space: true

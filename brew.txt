@@ -1,0 +1,16 @@
+ffmpeg
+fzf
+gh
+jandedobbeleer/oh-my-posh/oh-my-posh
+jq
+lazygit
+mongosh
+neovim
+numpy
+opa
+openssh
+opentofu
+redis
+stow
+wget
+yq

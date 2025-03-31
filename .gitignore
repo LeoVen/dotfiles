@@ -1,2 +1,5 @@
 # ohmyposh
 *.yaml.bak
+
+# nvim
+lazy-lock.json

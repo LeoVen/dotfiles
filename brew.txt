@@ -1,6 +1,7 @@
 ffmpeg
 fzf
 gh
+ghcup
 jandedobbeleer/oh-my-posh/oh-my-posh
 jq
 lazygit
@@ -11,6 +12,8 @@ opa
 openssh
 opentofu
 redis
+ripgrep
 stow
+tmux
 wget
 yq

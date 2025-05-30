@@ -14,6 +14,11 @@ return {
             clickable = true, -- Enables/disables clickable tabs
             tabpages = false, -- Enable/disables current/total tabpages indicator (top right corner)
             insert_at_end = true,
+            -- Set the filetypes which barbar will offset itself for
+            -- For example when opening neo-tree
+            sidebar_filetypes = {
+                ['neo-tree'] = { event = 'BufWipeout' },
+            },
             icons = {
                 button = '',
                 buffer_index = true,

@@ -15,6 +15,8 @@ export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 # MacOS
 export PATH=$PATH:/opt/homebrew/bin
 export PATH=/snap/bin/:$PATH
+# Haskell
+export PATH=$PATH:~/.ghcup/bin
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting

@@ -1,3 +1,4 @@
+fd
 ffmpeg
 fzf
 gh

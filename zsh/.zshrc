@@ -96,3 +96,10 @@ alias lg="lazygit"
 # alias ls="lsd"
 alias ls="eza"
 alias la="ls -lah"
+alias gpap="git pull --all --prune"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/leoven/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

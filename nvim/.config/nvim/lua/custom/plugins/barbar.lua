@@ -37,6 +37,8 @@ return {
         local map = vim.api.nvim_set_keymap
         local opts = { noremap = true, silent = true }
 
+        -- NOTE: Alacritty set option_as_alt in MacOS to use the Option key as A/M
+
         -- Move to previous/next
         map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
         map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
@@ -59,5 +61,6 @@ return {
         -- Close buffer
         map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
         map('n', '<A-b>', '<Cmd>BufferCloseAllButCurrent<CR>', opts)
+
     end,
 }

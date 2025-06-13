@@ -1,5 +1,15 @@
 return {
     {
+        'zaldih/themery.nvim',
+        lazy = false,
+        config = function()
+            require('themery').setup {
+                themes = { 'catppuccin', 'tokyonight' },
+                livePreview = true,
+            }
+        end,
+    },
+    {
         'catppuccin/nvim',
         name = 'catppuccin',
         priority = 1000,

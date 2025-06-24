@@ -96,6 +96,8 @@ return {
             vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
             vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
             vim.keymap.set('n', '<leader>sl', builtin.git_files, { desc = '[S]earch [l]s (git ls-files)' })
+            vim.keymap.set('n', '<leader>st', builtin.colorscheme, { desc = '[S]earch [T]hemes' })
+            vim.keymap.set('n', '<leader>sc', '<cmd>TodoTelescope<CR>', { desc = '[S]earch [C]omments' })
 
             vim.keymap.set('n', '<leader>sF', function()
                 builtin.find_files {

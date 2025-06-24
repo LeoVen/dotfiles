@@ -30,7 +30,7 @@ return {
 
             'saadparwaiz1/cmp_luasnip',
 
-            'onsails/lspkind.nvim',
+            'onsails/lspkind.nvim', -- vs-code pictograms
 
             -- Adds other completion capabilities.
             --  nvim-cmp does not ship with all sources by default. They are split

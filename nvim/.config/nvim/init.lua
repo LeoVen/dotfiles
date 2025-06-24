@@ -41,9 +41,6 @@ vim.opt.rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 require('lazy').setup({
-    -- For more information
-    -- :help lazy.nvim-lazy.nvim-structuring-your-plugins
-
     { import = 'custom.plugins' },
 
     require 'custom.lsp.init',
@@ -68,6 +65,10 @@ require('lazy').setup({
             task = '📌',
             lazy = '💤 ',
         },
+    },
+    change_detection = {
+        enabled = true,
+        notify = false,
     },
 })
 

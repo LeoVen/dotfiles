@@ -22,6 +22,11 @@ return {
             -- Press Alt (Meta) + hjkl to move the selected lines/blocks/characters
             require('mini.move').setup()
 
+            -- Split and join arguments
+            --
+            -- gS - toggle split/join
+            require('mini.splitjoin').setup { mappings = { toggle = 'gS' } }
+
             -- ... and there is more!
             --  Check out: https://github.com/echasnovski/mini.nvim
         end,

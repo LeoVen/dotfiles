@@ -1,20 +1,27 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 palette:
+  # sections from left to right
+  os: p:yellow
+  term: p:sapphire
+  dir: p:blue
+  git: p:flamingo
+  sterr: p:red
+  stok: p:green
+  time: p:lavender
+  exec: p:lavender
+  cursor: p:peach
+  # colours
+  # these values are mainly from catppuccin mocha
   base: "#1e1e2e"
   blue: "#89b4fa"
   crust: "#11111b"
-  cursor: p:peach
-  dir: p:blue
-  exec: p:lavender
   flamingo: "#f2cdcd"
-  git: p:flamingo
   green: "#a6e3a1"
   lavender: "#b4befe"
   mantle: "#181825"
   maroon: "#eba0ac"
   mauve: "#cba6f7"
-  os: p:yellow
   overlay0: "#6c7086"
   overlay1: "#7f849c"
   overlay2: "#9399b2"
@@ -30,9 +37,7 @@ palette:
   surface1: "#45475a"
   surface2: "#585b70"
   teal: "#94e2d5"
-  term: p:blue
   text: "#cdd6f4"
-  time: p:lavender
   yellow: "#f9e2af"
 secondary_prompt:
   template: "❯❯ "
@@ -119,7 +124,7 @@ blocks:
     style: plain
   - properties:
       cache_duration: none
-    template: " \ue718 {{ .Full }} "
+    template: " \ued0d {{ .Full }} "
     foreground: p:green
     background: transparent
     type: node
@@ -150,10 +155,20 @@ blocks:
   overflow: hide
   segments:
   - properties:
+      always_enabled: true
+    foreground: p:base
+    background_templates:
+      - "{{ if .Error }}p:sterr{{ end }}"
+      - "{{ if not .Error }}p:stok{{ end }}"
+    leading_diamond: 
+    template: " {{ .Code }} {{ if .Error }}<transparent,p:sterr></>{{ else }}<transparent,p:stok></>{{ end }}"
+    type: status
+    style: diamond
+  - properties:
       cache_duration: none
       style: roundrock
       threshold: 0
-    leading_diamond: " \ue0b2"
+    leading_diamond: <p:exec,transparent></>
     trailing_diamond: <transparent,p:exec></>
     template: " \uf252 {{ .FormattedMs }} "
     foreground: p:base
@@ -203,7 +218,7 @@ tooltips:
   - rustup
 - properties:
     display_mode: always
-  template: " \ue718 {{ .Full }}"
+  template: " \ued0d {{ .Full }} "
   foreground: p:green
   background: transparent
   type: node

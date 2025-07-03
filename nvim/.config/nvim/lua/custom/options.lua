@@ -1,9 +1,9 @@
 --  For more options, you can see `:help option-list`
 
+-- Setting both to true, only the active line shows the line number
 -- Make line numbers default
--- vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
+vim.opt.number = true
+-- Relative line numbers, to help with jumping.
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -55,3 +55,15 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Folding options
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldenable = true -- Enable folding.
+vim.o.foldcolumn = '1' -- Show folding signs.
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding.
+-- vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()' -- Use LSP for folding
+vim.o.foldlevel = 999 -- Close all folds.
+vim.o.foldlevelstart = 99 -- Start with all folds closed.
+vim.o.foldmethod = 'expr' -- Use expr to determine fold level.
+vim.o.foldopen = 'insert,mark,search,tag' -- Which commands open folds if the cursor moves into a closed fold.
+vim.o.foldtext = '' -- What to display on fold

@@ -32,6 +32,8 @@ return {
                 toml = { 'taplo' },
                 c = { 'clang-format' },
                 cpp = { 'clang-format' },
+                terraform = { 'tfmt' },
+                ['terraform-vars'] = { 'tfmt' },
 
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },
@@ -39,6 +41,13 @@ return {
                 -- You can use a sub-list to tell conform to run *until* a formatter
                 -- is found.
                 -- javascript = { { "prettierd", "prettier" } },
+            },
+            formatters = {
+                tfmt = {
+                    command = 'tofu',
+                    args = { 'fmt', '-' },
+                    stdin = true,
+                },
             },
         },
     },

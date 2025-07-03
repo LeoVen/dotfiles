@@ -80,8 +80,8 @@ return {
             pcall(require('telescope').load_extension, 'fzf')
             pcall(require('telescope').load_extension, 'ui-select')
 
-            require('telescope').load_extension 'file_browser'
-            vim.keymap.set('n', '-', ':Telescope file_browser<CR>')
+            -- require('telescope').load_extension 'file_browser'
+            -- vim.keymap.set('n', '-', ':Telescope file_browser<CR>')
 
             -- See `:help telescope.builtin`
             local builtin = require 'telescope.builtin'

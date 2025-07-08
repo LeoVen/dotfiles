@@ -1,3 +1,18 @@
+# Profile zsh startup, along with `zprof` at the end of the file, set it to true
+profile_zsh_init=false
+if [ "$profile_zsh_init" = true ]; then
+  zmodload zsh/zprof
+fi
+
+# XDG configuration
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Customize prompt
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/main-diamond.yaml)"
+
 # Set the directory we want to store zinit plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -9,6 +24,10 @@ if [ ! -d $ZINIT_HOME/.git ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+
+if [ command -v vivid &>/dev/null ]; then
+  export LS_COLORS="$(vivid generate catppuccin-mocha)"
+fi
 
 # Linux
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
@@ -25,15 +44,16 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
 zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::git
+zinit snippet OMZP::golang
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::npm
-zinit snippet OMZP::terraform
-zinit snippet OMZP::nvm
+# zinit snippet OMZP::nvm # This plugin is waaaay too slow on startup
+zinit snippet OMZP::sudo
+zinit snippet OMZP::tmux
 
 # File completions
 zinit ice as'completion'; zinit snippet https://raw.githubusercontent.com/rust-lang/cargo/master/src/etc/_cargo
@@ -42,7 +62,7 @@ zinit ice as'completion'; zinit snippet https://raw.githubusercontent.com/rust-l
 mkdir -p ~/.zfunc
 fpath+=~/.zfunc
 
-# TODO this needs to run only once
+# TODO: this needs to run only once
 if ! [ -x "$(command -v rustup)" ]; then
   rustup completions zsh > ~/.zfunc/_rustup
 fi
@@ -51,9 +71,6 @@ fi
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
-
-# Customize prompt
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/main-diamond.yaml)"
 
 # Keybindings
 bindkey -e
@@ -103,3 +120,9 @@ fpath=(/Users/leoven/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+# Profile zsh startup
+if [ "$profile_zsh_init" = true ]; then
+  zprof
+fi
+

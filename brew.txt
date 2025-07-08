@@ -3,6 +3,7 @@ ffmpeg
 fzf
 gh
 ghcup
+go
 jandedobbeleer/oh-my-posh/oh-my-posh
 jq
 lazygit

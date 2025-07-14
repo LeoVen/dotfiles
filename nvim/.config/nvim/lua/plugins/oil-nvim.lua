@@ -7,7 +7,20 @@ return {
         lazy = false,
         config = function()
             require('oil').setup {
+                columns = {
+                    'icon',
+                    -- 'permissions',
+                    -- 'size',
+                    -- 'mtime',
+                },
                 use_default_keymaps = false,
+                view_options = {
+                    show_hidden = true,
+                },
+                float = {
+                    max_width = 0.8,
+                    max_height = 0.8,
+                },
                 keymaps = {
                     -- TODO: adjust mappings
                     ['-'] = { 'actions.close', mode = 'n' },

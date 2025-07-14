@@ -32,6 +32,8 @@ return {
             --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+            -- In case of using blink
+            -- capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
             --  Add any additional override configuration in the following tables. Available keys are:
             --  - cmd (table): Override the default command used to start the server
@@ -65,14 +67,8 @@ return {
             --  You can press `g?` for help in this menu.
             require('mason').setup()
 
-            -- You can add other tools here that you want Mason to install
-            -- for you, so that they are available from within Neovim.
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                'lua_ls', -- Used to format Lua code
-            })
-
             require('mason-lspconfig').setup {
+                ensure_installed = ensure_installed,
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
@@ -81,9 +77,13 @@ return {
                         -- certain features of an LSP (for example, turning off formatting for tsserver)
                         server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
                         vim.lsp.config(server_name, server)
+                        vim.lsp.enable(server)
                     end,
                 },
-                ensure_installed = ensure_installed,
+            }
+
+            vim.diagnostic.config {
+                virtual_text = true,
             }
         end,
     },

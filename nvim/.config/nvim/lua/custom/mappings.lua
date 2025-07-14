@@ -41,3 +41,17 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Save without formatting
 -- You can add `noau` before any command and it won't run any autocmds
 vim.keymap.set('n', '<leader>wf', '<cmd>noau w<CR>', { desc = '[W]rite without [F]ormatting' })
+
+-- Toggle virtual text
+-- Useful when the error message is too big and doesn't fit in the current line
+vim.keymap.set('n', '<leader>k', function()
+    vim.diagnostic.config { virtual_lines = { current_line = true }, virtual_text = false }
+
+    vim.api.nvim_create_autocmd('CursorMoved', {
+        group = vim.api.nvim_create_augroup('line-diagnostics', { clear = true }),
+        callback = function()
+            vim.diagnostic.config { virtual_lines = false, virtual_text = true }
+            return true
+        end,
+    })
+end)

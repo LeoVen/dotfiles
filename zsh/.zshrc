@@ -106,14 +106,22 @@ export NVM_COMPLETION=true
 export NVM_SYMLINK_CURRENT="true"
 zinit wait lucid light-mode for lukechilds/zsh-nvm
 
+# Rust
 export CARGO_BUILD_TARGET_DIR=~/.target
 
+# Go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Aliases
 alias dc="docker compose"
 alias lg="lazygit"
-# alias ls="lsd"
 alias ls="eza"
 alias la="ls -lah"
 alias gpap="git pull --all --prune"
+
+# Removing Aliases
+unalias gow
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/leoven/.docker/completions $fpath)

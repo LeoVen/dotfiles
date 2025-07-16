@@ -1,0 +1,33 @@
+# television configuration overrides
+
+[ui]
+use_nerd_font_icons = true
+theme = "catppuccin"
+
+[keybindings]
+select_next_entry = ["ctrl-n"]
+select_prev_entry = ["ctrl-p"]
+scroll_preview_half_page_down = ["ctrl-j"]
+scroll_preview_half_page_up = ["ctrl-k"]
+
+[shell_integration]
+fallback_channel = "files"
+
+[shell_integration.channel_triggers]
+dirs = ["cd", "ls", "la", "rmdir", "nvim"]
+files = [
+  "cat",
+  "less",
+  "head",
+  "tail",
+  "cp",
+  "mv",
+  "rm",
+  "touch",
+  "chmod",
+  "chown",
+  "ln",
+  "zip",
+  "unzip",
+  "nvim",
+]

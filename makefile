@@ -22,10 +22,13 @@ nvim:
 ohmyposh:
 	stow -t $T -S ohmyposh
 
+television:
+	stow -t $T -S television
+
 tmux:
 	stow -t $T -S tmux
 
 zsh:
 	stow -t $T -S zsh
 
-.PHONY: up down alacritty lazygit nvim ohmyposh tmux zsh
+.PHONY: up down alacritty lazygit nvim ohmyposh television tmux zsh

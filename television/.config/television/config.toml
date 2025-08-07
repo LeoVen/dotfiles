@@ -5,10 +5,10 @@ use_nerd_font_icons = true
 theme = "catppuccin"
 
 [keybindings]
-select_next_entry = ["ctrl-n"]
-select_prev_entry = ["ctrl-p"]
-scroll_preview_half_page_down = ["ctrl-j"]
-scroll_preview_half_page_up = ["ctrl-k"]
+ctrl-n = "select_next_entry"
+ctrl-p = "select_prev_entry"
+ctrl-j = "scroll_preview_half_page_down"
+ctrl-k = "scroll_preview_half_page_up"
 
 [shell_integration]
 fallback_channel = "files"

@@ -5,9 +5,12 @@ fzf
 gh
 ghcup
 go
+helm
 jandedobbeleer/oh-my-posh/oh-my-posh
 jq
+just
 lazygit
+minikube
 mongosh
 neovim
 numpy

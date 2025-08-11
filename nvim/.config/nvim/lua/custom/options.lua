@@ -67,3 +67,6 @@ vim.o.foldlevelstart = 99 -- Start with all folds closed.
 vim.o.foldmethod = 'expr' -- Use expr to determine fold level.
 vim.o.foldopen = 'insert,mark,search,tag' -- Which commands open folds if the cursor moves into a closed fold.
 vim.o.foldtext = '' -- What to display on fold
+
+-- Don't use swap files
+vim.o.swapfile = false

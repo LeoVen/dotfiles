@@ -1,4 +1,6 @@
+adr-tools
 bat
+derailed/k9s/k9s
 fd
 ffmpeg
 fzf
@@ -13,14 +15,17 @@ lazygit
 minikube
 mongosh
 neovim
+node_exporter
 numpy
 opa
 openssh
 opentofu
+protobuf
 redis
 ripgrep
 stow
 television
 tmux
 wget
+yazi
 yq

@@ -38,6 +38,12 @@ television:
 tmux:
     stow -t {{T}} -S tmux
 
+wezterm:
+    stow -t {{T}} -S wezterm
+
+yazi:
+    stow -t {{T}} -S yazi
+
 zhs:
     stow -t {{T}} -S zhs
 

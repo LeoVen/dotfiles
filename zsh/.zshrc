@@ -70,6 +70,10 @@ fi
 # Load completions
 autoload -Uz compinit && compinit
 
+if ! type kubectl &> /dev/null; then
+  source <(kubectl completion zsh)
+fi
+
 zinit cdreplay -q
 
 # Keybindings
@@ -135,3 +139,5 @@ if [ "$profile_zsh_init" = true ]; then
   zprof
 fi
 
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/tofu tofu

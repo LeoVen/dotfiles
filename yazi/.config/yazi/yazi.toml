@@ -1,0 +1,15 @@
+[mgr]
+show_hidden = true
+
+[opener]
+edit = [{ run = 'nvim "$@"', for = "unix", block = true }]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"

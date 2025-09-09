@@ -1,0 +1,8 @@
+bat
+bottom
+cargo-script
+cargo-server
+cargo-udeps
+cargo-watch
+dysk
+eza

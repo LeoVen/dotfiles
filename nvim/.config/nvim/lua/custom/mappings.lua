@@ -61,4 +61,4 @@ vim.keymap.set('n', '<leader>pd', "<CMD>pu=strftime('%F')<CR>", { desc = '[P]ast
 vim.keymap.set('n', '<leader>pt', "<CMD>pu=strftime('%T')<CR>", { desc = '[P]aste [Time]' })
 
 -- Dictionary
-vim.keymap.set('n', '<leader>wd', require('util.dictionary').lookup_word, { desc = 'Dictionary Lookup (signature help)' })
+vim.keymap.set({ 'n', 'v' }, '<leader>wd', require('util.dictionary').lookup_word, { desc = 'Dictionary Lookup (signature help)' })

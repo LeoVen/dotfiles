@@ -7,13 +7,6 @@ local function log(msg)
     vim.fn.writefile({ line }, logfile, 'a')
 end
 
--- Get the word under the cursor
-local function get_word_under_cursor()
-    local word = vim.fn.expand '<cword>'
-    log('Getting word under cursor: ' .. tostring(word))
-    return word
-end
-
 -- Fetch definition from dictionaryapi.dev (async)
 local function fetch_definition(word, callback)
     local url = string.format('https://api.dictionaryapi.dev/api/v2/entries/en/%s', word)
@@ -60,21 +53,47 @@ end
 
 -- Main function to trigger lookup
 function M.lookup_word()
+    local selection = require 'util.selection'
+
     log 'Looking up word'
-    local word = get_word_under_cursor()
-    if not word or word == '' then
-        vim.notify('No word under cursor.', vim.log.levels.WARN)
-        log 'No word under cursor to look up'
-        return
+
+    local word = ''
+
+    if vim.fn.mode() == 'n' then
+        word = selection.get_word_under_cursor()
+
+        if not word or word == '' then
+            log 'No word under cursor to look up'
+
+            vim.notify('No word selected or under cursor.', vim.log.levels.WARN)
+
+            return
+        end
+    else -- V, v, visual-block
+        local select = selection.get_visual_selection_text()
+
+        if not select or next(select) == nil then
+            log 'Could not determine selected word'
+            vim.notify('Could not determine selected word', vim.log.levels.WARN)
+            return
+        end
+
+        if #select == 1 then
+            word = select[1]
+        else
+            -- Not supported
+            log 'Multiline selection not supported'
+            vim.notify('Multiline selection not supported', vim.log.levels.WARN)
+            return
+        end
     end
+
     log('Looking up word: ' .. tostring(word))
     fetch_definition(word, function(definition)
         show_definition_popup(word, definition)
     end)
+
     log 'end lookup word'
 end
-
--- Setup keymap
-function M.setup(_) end
 
 return M

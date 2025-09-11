@@ -52,11 +52,13 @@ return {
                     filetypes = { 'c', 'cpp' },
                 },
                 gopls = {},
-                tailwindcss = {},
+                -- tailwindcss = {},
                 jsonls = require 'lsp.jsonls',
                 yamlls = require 'lsp.yamlls',
 
                 lua_ls = {},
+
+                marksman = {},
             }
 
             -- Ensure the servers and tools above are installed
@@ -66,6 +68,11 @@ return {
             --
             --  You can press `g?` for help in this menu.
             require('mason').setup()
+
+            local ensure_installed = vim.tbl_keys(servers or {})
+            vim.list_extend(ensure_installed, {
+                'lua_ls', -- Used to format Lua code
+            })
 
             require('mason-lspconfig').setup {
                 ensure_installed = ensure_installed,

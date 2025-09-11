@@ -16,6 +16,7 @@ return {
     },
     opts = {
         filesystem = {
+            bind_to_cwd = true,
             window = {
                 position = 'left',
                 width = 40,

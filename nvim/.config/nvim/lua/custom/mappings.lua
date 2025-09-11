@@ -55,3 +55,10 @@ vim.keymap.set('n', '<leader>k', function()
         end,
     })
 end)
+
+-- Pasting helpful strings
+vim.keymap.set('n', '<leader>pd', "<CMD>pu=strftime('%F')<CR>", { desc = '[P]aste [Date]' })
+vim.keymap.set('n', '<leader>pt', "<CMD>pu=strftime('%T')<CR>", { desc = '[P]aste [Time]' })
+
+-- Dictionary
+vim.keymap.set('n', '<leader>wd', require('util.dictionary').lookup_word, { desc = 'Dictionary Lookup (signature help)' })

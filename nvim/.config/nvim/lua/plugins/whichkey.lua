@@ -14,6 +14,7 @@ return {
                     { '<leader>w', '[W]orkspace' },
                     { '<leader>t', '[T]oggle' },
                     { '<leader>h', 'Git [H]unk' },
+                    { '<leader>o', '[O]bsidian' },
                 },
                 {
                     mode = 'v',

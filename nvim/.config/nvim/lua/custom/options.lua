@@ -70,3 +70,6 @@ vim.o.foldtext = '' -- What to display on fold
 
 -- Don't use swap files
 vim.o.swapfile = false
+
+-- Some markdown support
+vim.o.conceallevel = 1

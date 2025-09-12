@@ -12,6 +12,7 @@ jandedobbeleer/oh-my-posh/oh-my-posh
 jq
 just
 lazygit
+mermaid-cli
 minikube
 mongosh
 neovim

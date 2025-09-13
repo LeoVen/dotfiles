@@ -19,7 +19,7 @@ return {
             workspaces = {
                 {
                     name = 'MainVault',
-                    path = '~/leoven/github/MainVault',
+                    path = '~/github/leoven/MainVault',
                 },
             },
             -- TODO: later remove this once obsidian.nvim is updated

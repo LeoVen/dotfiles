@@ -8,7 +8,10 @@ everything:
     just lazygit
     just nvim
     just ohmyposh
+    just television
     just tmux
+    just wezterm
+    just yazi
     just zsh
 
 remove:
@@ -18,7 +21,9 @@ remove:
     stow -t {{T}} -D ohmyposh
     stow -t {{T}} -D television
     stow -t {{T}} -D tmux
-    stow -t {{T}} -D zhs
+    stow -t {{T}} -D wezterm
+    stow -t {{T}} -D yazi
+    stow -t {{T}} -D zsh
 
 alacritty:
     stow -t {{T}} -S alacritty
@@ -44,6 +49,6 @@ wezterm:
 yazi:
     stow -t {{T}} -S yazi
 
-zhs:
-    stow -t {{T}} -S zhs
+zsh:
+    stow -t {{T}} -S zsh
 

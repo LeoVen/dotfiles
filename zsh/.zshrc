@@ -106,6 +106,11 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 eval "$(fzf --zsh)"
 eval "$(tv init zsh)"
 
+# tmux
+if [[ $TMUX ]]; then
+  alias clear='clear && tmux clear-history'
+fi
+
 # NVM
 export NVM_COMPLETION=true
 export NVM_SYMLINK_CURRENT="true"

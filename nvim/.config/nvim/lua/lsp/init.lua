@@ -20,6 +20,8 @@ return {
                     library = {
                         -- See the configuration section for more details
                         -- Load luvit types when the `vim.uv` word is found
+                        { path = 'snacks.nvim', words = { 'Snacks' } },
+                        { path = 'lazy.nvim', words = { 'LazyVim' } },
                         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
                     },
                 },
@@ -45,6 +47,7 @@ return {
                 -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 ts_ls = {},
                 rust_analyzer = {},
+                vue_ls = {},
                 terraformls = {},
                 taplo = {},
                 pyright = {},
@@ -52,6 +55,7 @@ return {
                     filetypes = { 'c', 'cpp' },
                 },
                 gopls = {},
+                docker_language_server = {},
                 -- tailwindcss = {},
                 jsonls = require 'lsp.jsonls',
                 yamlls = require 'lsp.yamlls',
@@ -70,9 +74,6 @@ return {
             require('mason').setup()
 
             local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                'lua_ls', -- Used to format Lua code
-            })
 
             require('mason-lspconfig').setup {
                 ensure_installed = ensure_installed,

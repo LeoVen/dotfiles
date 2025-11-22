@@ -16,6 +16,10 @@ return {
         ---@module 'obsidian'
         ---@type obsidian.config
         opts = {
+            ui = {
+                -- Use render-markdown instead
+                enabled = false,
+            },
             workspaces = {
                 {
                     name = 'MainVault',

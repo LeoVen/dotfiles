@@ -1,0 +1,45 @@
+#
+#       ██████╗ ██╗  ██╗ ██████╗ ███████╗████████╗████████╗██╗   ██╗
+#      ██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝╚══██╔══╝╚██╗ ██╔╝
+#      ██║  ███╗███████║██║   ██║███████╗   ██║      ██║    ╚████╔╝
+#      ██║   ██║██╔══██║██║   ██║╚════██║   ██║      ██║     ╚██╔╝
+#      ╚██████╔╝██║  ██║╚██████╔╝███████║   ██║      ██║      ██║
+#       ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝      ╚═╝      ╚═╝
+#
+#                      Ghostty Terminal Config 👻
+#
+
+term = xterm-256color
+theme = mocha
+
+font-family = "JetBrains Mono"
+font-size = 12
+font-feature = -calt, -liga, -dlig
+
+window-height = 35
+window-width = 135
+window-position-x = 0
+window-position-y = 0
+
+window-padding-x = 12
+window-padding-y = 12
+
+# --- macOS stuff --- #
+macos-option-as-alt = true
+window-save-state = never
+
+# --- appearance --- #
+window-padding-balance = true
+
+# --- Shell Integration --- #
+shell-integration = zsh
+shell-integration-features = no-cursor
+
+# --- Keybindings for cursor movement ---
+# Cmd-key bindings (beginning/end of line)
+keybind = cmd+left=text:\x01
+keybind = cmd+right=text:\x05
+
+# Alt-arrow bindings (word movements)
+keybind = alt+left=esc:b
+keybind = alt+right=esc:f

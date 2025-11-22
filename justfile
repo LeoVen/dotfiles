@@ -5,6 +5,7 @@ default:
 
 everything:
     just alacritty
+    just ghostty
     just lazygit
     just nvim
     just ohmyposh
@@ -16,6 +17,7 @@ everything:
 
 remove:
     stow -t {{T}} -D alacritty
+    stow -t {{T}} -D ghostty
     stow -t {{T}} -D lazygit
     stow -t {{T}} -D nvim
     stow -t {{T}} -D ohmyposh
@@ -27,6 +29,9 @@ remove:
 
 alacritty:
     stow -t {{T}} -S alacritty
+
+ghostty:
+    stow -t {{T}} -S ghostty
 
 lazygit:
     stow -t {{T}} -S lazygit

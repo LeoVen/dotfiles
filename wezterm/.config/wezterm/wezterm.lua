@@ -18,19 +18,25 @@ config.show_tab_index_in_tab_bar = false
 config.use_fancy_tab_bar = false
 
 config.keys = {
-    -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
     {
         key = 'LeftArrow',
         mods = 'OPT',
-        action = act.SendKey {
-            key = 'b',
-            mods = 'ALT',
-        },
+        action = act.SendKey { key = 'b', mods = 'ALT' },
     },
     {
         key = 'RightArrow',
         mods = 'OPT',
         action = act.SendKey { key = 'f', mods = 'ALT' },
+    },
+    {
+        key = 'LeftArrow',
+        mods = 'CMD',
+        action = act { SendString = '\x1bOH' },
+    },
+    {
+        key = 'RightArrow',
+        mods = 'CMD',
+        action = act { SendString = '\x1bOF' },
     },
 }
 

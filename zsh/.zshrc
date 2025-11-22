@@ -133,6 +133,10 @@ alias gpap="git pull --all --prune"
 # Removing Aliases
 unalias gow
 
+zsh_stats () {
+  fc -l 2 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep --color=auto -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
+}
+
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/leoven/.docker/completions $fpath)
 autoload -Uz compinit
@@ -140,6 +144,7 @@ compinit
 # End of Docker CLI completions
 
 # Profile zsh startup
+# Keep this at the very end of the file
 if [ "$profile_zsh_init" = true ]; then
   zprof
 fi

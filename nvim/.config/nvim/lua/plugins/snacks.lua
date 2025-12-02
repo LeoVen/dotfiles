@@ -28,6 +28,8 @@ return {
             { '<leader><space>', function() Snacks.picker.buffers() end, desc = 'Buffers' },
             { '<leader>fg', function() Snacks.picker.grep() end, desc = 'Find Grep' },
             { '<leader>fl', function() Snacks.picker.lines() end, desc = 'Buffer Lines' },
+            { "<leader>/", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+            { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
 
             -- Neovim Stuff
             { '<leader>f:', function() Snacks.picker.command_history() end, desc = 'Command History' },

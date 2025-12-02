@@ -49,18 +49,17 @@ return {
             local servers = {
                 -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 ts_ls = require 'lsp.ts_ls',
-                vue_ls = {},
+                vue_ls = {}, -- See also ts_ls setup
 
                 rust_analyzer = {},
                 terraformls = {},
                 taplo = {},
                 pyright = {},
-                clangd = {
-                    filetypes = { 'c', 'cpp' },
-                },
+                clangd = {},
                 gopls = {},
                 docker_language_server = {},
                 -- tailwindcss = {},
+
                 jsonls = require 'lsp.jsonls',
                 yamlls = require 'lsp.yamlls',
 
@@ -82,7 +81,7 @@ return {
             local ensure_installed = vim.tbl_keys(servers or {})
             require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-            ---@type MasonLspconfigSettings
+            -- Just enable all servers
             require('mason-lspconfig').setup {
                 automatic_enable = vim.tbl_keys(servers or {}),
             }

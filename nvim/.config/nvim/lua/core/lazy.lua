@@ -28,7 +28,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     { import = 'plugins' },
     require 'lsp.init',
-    require 'dap.init',
+    require 'debug.init',
     require 'custom.themes',
 }, {
     change_detection = {

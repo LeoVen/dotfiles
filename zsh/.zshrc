@@ -4,6 +4,12 @@ if [ "$profile_zsh_init" = true ]; then
   zmodload zsh/zprof
 fi
 
+# Setup edit-command-line by using: Ctrl-X + Ctrl-E
+export EDITOR="nvim"
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # XDG configuration
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

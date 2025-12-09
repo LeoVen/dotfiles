@@ -1,11 +1,9 @@
 return {
     { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
-        event = 'VeryLazy',
         dependencies = {
             -- Automatically install LSPs and related tools to stdpath for Neovim
             -- Mason must be loaded before its dependents so we need to set it up here.
-            -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
             { 'mason-org/mason.nvim', opts = {} },
             'mason-org/mason-lspconfig.nvim',
             'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -36,6 +34,7 @@ return {
             --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
             --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
             local capabilities = vim.lsp.protocol.make_client_capabilities()
+            -- In case of using nvim-cmp
             capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
             -- In case of using blink
             -- capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
@@ -53,7 +52,6 @@ return {
 
                 rust_analyzer = {},
                 terraformls = {},
-                taplo = {},
                 pyright = {},
                 clangd = {},
                 gopls = {},
@@ -68,22 +66,31 @@ return {
                 marksman = {},
             }
 
-            -- Ensure the servers and tools above are installed
-            require('mason').setup()
-
-            -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-            -- use mason-tool-installer to ensure all LSPs are installed
-            local ensure_installed = vim.tbl_keys(servers or {})
-            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-            -- Just enable all servers
-            require('mason-lspconfig').setup {
-                automatic_enable = vim.tbl_keys(servers or {}),
+            local formatters = {
+                'stylua',
+                'taplo',
             }
 
-            for server_name, config in pairs(servers) do
-                vim.lsp.config(server_name, config)
-            end
+            local ensure_installed = vim.tbl_keys(servers or {})
+            vim.list_extend(ensure_installed, formatters)
+
+            -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+            require('mason-lspconfig').setup {
+                ensure_installed = {}, -- explicitly set to an empty table (this is done via mason-tool-installer)
+                automatic_installation = false,
+                handlers = {
+                    function(server_name)
+                        local server = servers[server_name] or {}
+                        -- This handles overriding only values explicitly passed
+                        -- by the server configuration above. Useful when disabling
+                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
+                        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+                        require('lspconfig')[server_name].setup(server)
+                    end,
+                },
+            }
 
             vim.diagnostic.config {
                 virtual_text = true,

@@ -22,13 +22,6 @@ return {
         },
         keys = {
             {
-                '<F5>',
-                function()
-                    require('dap').continue()
-                end,
-                desc = 'Debug: Start/Continue',
-            },
-            {
                 '<F1>',
                 function()
                     require('dap').step_into()
@@ -50,6 +43,35 @@ return {
                 desc = 'Debug: Step Out',
             },
             {
+                '<F4>',
+                function()
+                    require('dap').list_breakpoints()
+                end,
+                desc = 'Debug: List breakpoints',
+            },
+            {
+                '<F5>',
+                function()
+                    require('dap').continue()
+                end,
+                desc = 'Debug: Start/Continue',
+            },
+            {
+                '<F6>',
+                function()
+                    require('dap').close()
+                end,
+                desc = 'Debug: Stop',
+            },
+            {
+                -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+                '<F7>',
+                function()
+                    require('dapui').toggle()
+                end,
+                desc = 'Debug: See last session result.',
+            },
+            {
                 '<leader>db',
                 function()
                     require('dap').toggle_breakpoint()
@@ -63,14 +85,6 @@ return {
                 end,
                 desc = 'Debug: Set Breakpoint',
             },
-            -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-            {
-                '<F7>',
-                function()
-                    require('dapui').toggle()
-                end,
-                desc = 'Debug: See last session result.',
-            },
         },
         config = function()
             local dap = require 'dap'
@@ -83,10 +97,12 @@ return {
                 ensure_installed = {
                     'js-debug-adapter',
                     'codelldb',
+                    'delve',
                 },
             }
 
             -- Dap UI setup
+            ---@type dapui.Config
             dapui.setup {
                 -- Set icons to characters that are more likely to work in every terminal.
                 --    Feel free to remove or use ones that you like more! :)
@@ -105,7 +121,43 @@ return {
                         disconnect = '⏏',
                     },
                 },
+                layouts = {
+                    -- scopes, breakpoints, stacks, watches, repl, console
+                    {
+                        -- You can change the order of elements in the sidebar
+                        elements = {
+                            -- Provide IDs as strings or tables with "id" and "size" keys
+                            {
+                                id = 'scopes',
+                                size = 0.25, -- Can be float or integer > 1
+                            },
+                            { id = 'breakpoints', size = 0.25 },
+                            { id = 'stacks', size = 0.25 },
+                            { id = 'watches', size = 0.25 },
+                        },
+                        size = 40,
+                        position = 'left', -- Can be "left" or "right"
+                    },
+                    {
+                        elements = {
+                            'console',
+                        },
+                        size = 10,
+                        position = 'bottom', -- Can be "bottom" or "top"
+                    },
+                    {
+                        elements = {
+                            'repl',
+                        },
+                        size = 10,
+                        position = 'bottom', -- Can be "bottom" or "top"
+                    },
+                },
             }
+
+            vim.keymap.set('n', '<leader>de', function()
+                dapui.eval()
+            end, { desc = 'Dapui: Eval' })
 
             vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
             vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
@@ -122,7 +174,6 @@ return {
             dap.listeners.before.event_terminated['dapui_config'] = dapui.close
             dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-            -- TODO: move these to JS specific configs
             dap.adapters = {
                 ['pwa-node'] = {
                     type = 'server',
@@ -143,92 +194,19 @@ return {
                         args = { '--port', '${port}' },
                     },
                 },
-            }
-
-            for _, language in ipairs { 'typescript', 'javascript' } do
-                require('dap').configurations[language] = {
-                    {
-                        type = 'pwa-node',
-                        request = 'launch',
-                        name = 'Launch file',
-                        program = '${file}',
-                        cwd = '${workspaceFolder}',
+                ['go'] = {
+                    type = 'server',
+                    port = '${port}',
+                    executable = {
+                        command = 'dlv',
+                        args = { 'dap', '-l', '127.0.0.1:${port}' },
                     },
-                    {
-                        type = 'pwa-node',
-                        request = 'attach',
-                        name = 'Attach',
-                        processId = require('dap.utils').pick_process,
-                        cwd = '${workspaceFolder}',
-                        port = 9229,
-                    },
-                }
-            end
-
-            dap.configurations['typescript'] = {
-                {
-                    name = 'NestJS: debug',
-                    type = 'pwa-node',
-                    request = 'launch',
-                    trace = true,
-                    cwd = vim.fn.getcwd(),
-                    runtimeExecutable = 'node',
-                    program = '${workspaceFolder}/node_modules/@nestjs/cli/bin/nest.js',
-                    args = {
-                        'start',
-                        '--debug',
-                        '--watch',
-                        '--preserveWatchOutput',
-                    },
-                    sourceMaps = true,
-                    stopOnEntry = false,
-                    console = 'integratedTerminal',
-                    protocol = 'auto',
-                    outDir = '${workspaceFolder}/dist',
-                    restart = true,
                 },
             }
 
-            dap.configurations.rust = {
-                {
-                    name = 'Launch file',
-                    type = 'codelldb',
-                    request = 'launch',
-                    program = function()
-                        -- This function builds the project first and then
-                        -- allows you to select an executable
-
-                        vim.notify('Building project, please wait...', vim.log.levels.WARN)
-
-                        local output = vim.fn.systemlist 'cargo build -q --message-format=json 2>1'
-
-                        local i = 1
-                        local executables = {}
-                        local selections = {}
-                        selections[i] = 'Select executable:'
-
-                        for _, l in ipairs(output) do
-                            local json = vim.json.decode(l)
-                            if json == nil then
-                                error 'error parsing json'
-                            end
-                            if json.success == false then
-                                return error 'error building package'
-                            end
-                            if type(json.executable) == 'string' then
-                                executables[i] = json.executable
-                                selections[i + 1] = i .. ': ' .. json.executable
-                                i = i + 1
-                            end
-                        end
-
-                        return executables[vim.fn.inputlist(selections)]
-                    end,
-                    cwd = '${workspaceFolder}',
-                    stopOnEntry = false,
-                    args = {},
-                },
-            }
+            dap.configurations.go = require 'debug.go'
+            dap.configurations.typescript = require 'debug.typescript'
+            dap.configurations.rust = require 'debug.rust'
         end,
     },
 }

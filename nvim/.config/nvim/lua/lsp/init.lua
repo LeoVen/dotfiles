@@ -8,10 +8,6 @@ return {
             'mason-org/mason-lspconfig.nvim',
             'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-            -- Useful status updates for LSP.
-            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', opts = {} },
-
             -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
             -- used for completion, annotations and signatures of Neovim apis
             {
@@ -50,9 +46,18 @@ return {
                 ts_ls = require 'lsp.ts_ls',
                 vue_ls = {}, -- See also ts_ls setup
 
-                rust_analyzer = {},
+                rust_analyzer = {
+                    settings = {
+                        ['rust-analyzer'] = {
+                            -- https://rust-analyzer.github.io/book/configuration.html
+                            check = {
+                                command = 'clippy',
+                                extraArgs = { '--no-deps' },
+                            },
+                        },
+                    },
+                },
                 terraformls = {},
-                pyright = {},
                 clangd = {},
                 gopls = {},
                 docker_language_server = {},
@@ -63,34 +68,44 @@ return {
 
                 lua_ls = {},
 
+                bashls = {
+                    -- Already comes with shellcheck integration
+                },
+
                 marksman = {},
+
+                -- Python
+                ty = {},
             }
 
+            -- Make sure these are setup in conform.nvim
             local formatters = {
+                'clang-format',
                 'stylua',
                 'taplo',
+                'ruff',
+                'jq',
+                'yq',
             }
 
-            local ensure_installed = vim.tbl_keys(servers or {})
+            -- ISSUE: all formatters are not in the automatic_enable table
+            local ensure_installed = vim.tbl_keys(servers)
             vim.list_extend(ensure_installed, formatters)
 
             -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
             require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+            ---@type MasonLspconfigSettings
+            ---@diagnostic disable-next-line: missing-fields
             require('mason-lspconfig').setup {
-                ensure_installed = {}, -- explicitly set to an empty table (this is done via mason-tool-installer)
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        -- This handles overriding only values explicitly passed
-                        -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-                        require('lspconfig')[server_name].setup(server)
-                    end,
-                },
+                automatic_enable = vim.tbl_keys(servers or {}),
             }
+
+            -- Installed LSPs are configured and enabled automatically with mason-lspconfig
+            -- The loop below is for overriding the default configuration of LSPs with the ones in the servers table
+            for server_name, config in pairs(servers) do
+                vim.lsp.config(server_name, config)
+            end
 
             vim.diagnostic.config {
                 virtual_text = true,

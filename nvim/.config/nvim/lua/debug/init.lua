@@ -11,6 +11,8 @@ return {
         },
     },
     {
+        -- Installation
+        -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
         'mfussenegger/nvim-dap',
         dependencies = {
             -- Debugger UI
@@ -202,11 +204,38 @@ return {
                         args = { 'dap', '-l', '127.0.0.1:${port}' },
                     },
                 },
+                ['python'] = function(cb, config)
+                    -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
+                    if config.request == 'attach' then
+                        ---@diagnostic disable-next-line: undefined-field
+                        local port = (config.connect or config).port
+                        ---@diagnostic disable-next-line: undefined-field
+                        local host = (config.connect or config).host or '127.0.0.1'
+                        cb {
+                            type = 'server',
+                            port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+                            host = host,
+                            options = {
+                                source_filetype = 'python',
+                            },
+                        }
+                    else
+                        cb {
+                            type = 'executable',
+                            command = '.venv/bin/python', -- Assuming debugpy is installed with uv in cwd/.venv
+                            args = { '-m', 'debugpy.adapter' },
+                            options = {
+                                source_filetype = 'python',
+                            },
+                        }
+                    end
+                end,
             }
 
             dap.configurations.go = require 'debug.go'
             dap.configurations.typescript = require 'debug.typescript'
             dap.configurations.rust = require 'debug.rust'
+            dap.configurations.python = require 'debug.python'
         end,
     },
 }

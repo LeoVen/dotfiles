@@ -24,6 +24,9 @@ return {
                     lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
                 }
             end,
+            -- Make sure these formatters are defined in the LSP/Formatters setup for mason-tool-installer
+            -- List of formatters:
+            -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
             formatters_by_ft = {
                 lua = { 'stylua' },
                 jsonc = { 'jq' },
@@ -34,6 +37,7 @@ return {
                 cpp = { 'clang-format' },
                 terraform = { 'tfmt' },
                 ['terraform-vars'] = { 'tfmt' },
+                python = { 'ruff_format', 'ruff_fix', 'ruff_organize_imports' },
 
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },

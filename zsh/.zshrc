@@ -149,11 +149,11 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/tofu tofu
+
 # Profile zsh startup
 # Keep this at the very end of the file
 if [ "$profile_zsh_init" = true ]; then
   zprof
 fi
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/tofu tofu

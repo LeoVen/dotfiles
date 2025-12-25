@@ -45,12 +45,12 @@ return {
                 },
             },
             callbacks = {
-                enter_note = function(_, _)
+                enter_note = function(_)
                     vim.keymap.set('n', '<leader>ot', '<CMD>Obsidian tags<CR>', { desc = '[O]bsidian [T]ags' })
                     vim.keymap.set('n', '<leader>op', '<CMD>Obsidian template<CR>', { desc = '[O]bsidian [P]aste from Template' })
                     vim.keymap.set('n', '<leader>ob', '<CMD>Obsidian backlinks<CR>', { desc = '[O]bsidian [B]acklinks' })
                 end,
-                post_setup = function(_)
+                post_setup = function()
                     vim.keymap.set('n', '<leader>os', '<CMD>Obsidian search<CR>', { desc = '[O]bsidian [S]earch' })
                     vim.keymap.set('n', '<leader>on', '<CMD>Obsidian new_from_template<CR>', { desc = '[O]bsidian [N]ew from Template' })
                 end,

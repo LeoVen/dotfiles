@@ -46,17 +46,7 @@ return {
                 ts_ls = require 'lsp.ts_ls',
                 vue_ls = {}, -- See also ts_ls setup
 
-                rust_analyzer = {
-                    settings = {
-                        ['rust-analyzer'] = {
-                            -- https://rust-analyzer.github.io/book/configuration.html
-                            check = {
-                                command = 'clippy',
-                                extraArgs = { '--no-deps' },
-                            },
-                        },
-                    },
-                },
+                rust_analyzer = require 'lsp.rust',
                 terraformls = {},
                 clangd = {},
                 gopls = {},
@@ -80,25 +70,21 @@ return {
 
             -- Make sure these are setup in conform.nvim
             local formatters = {
-                'clang-format',
-                'stylua',
-                'taplo',
-                'ruff',
-                'jq',
-                'yq',
+                ['clang-format'] = {},
+                stylua = {},
+                taplo = {},
+                ruff = {},
+                jq = {},
+                yq = {},
             }
 
-            -- ISSUE: all formatters are not in the automatic_enable table
-            local ensure_installed = vim.tbl_keys(servers)
-            vim.list_extend(ensure_installed, formatters)
-
             -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+            require('mason-tool-installer').setup { ensure_installed = vim.list_extend(vim.tbl_keys(servers), vim.tbl_keys(formatters)) }
 
             ---@type MasonLspconfigSettings
             ---@diagnostic disable-next-line: missing-fields
             require('mason-lspconfig').setup {
-                automatic_enable = vim.tbl_keys(servers or {}),
+                automatic_enable = vim.tbl_keys(vim.tbl_extend('error', servers, formatters)),
             }
 
             -- Installed LSPs are configured and enabled automatically with mason-lspconfig

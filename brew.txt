@@ -34,6 +34,7 @@ sevenzip
 stow
 television
 tmux
+tree-sitter-cli
 uv
 vivid
 wget

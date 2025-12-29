@@ -66,25 +66,29 @@ return {
 
                 -- Python
                 ty = {},
-            }
 
-            -- Make sure these are setup in conform.nvim
-            local formatters = {
+                -- Formatters
+                -- Make sure these are setup in conform.nvim
                 ['clang-format'] = {},
                 stylua = {},
                 taplo = {},
-                ruff = {},
+                ruff = {
+                    -- https://docs.astral.sh/ruff/configuration/#full-command-line-interface
+                    settings = {},
+                },
                 jq = {},
                 yq = {},
             }
 
+            local server_list = vim.tbl_keys(servers)
+
             -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-            require('mason-tool-installer').setup { ensure_installed = vim.list_extend(vim.tbl_keys(servers), vim.tbl_keys(formatters)) }
+            require('mason-tool-installer').setup { ensure_installed = server_list }
 
             ---@type MasonLspconfigSettings
             ---@diagnostic disable-next-line: missing-fields
             require('mason-lspconfig').setup {
-                automatic_enable = vim.tbl_keys(vim.tbl_extend('error', servers, formatters)),
+                automatic_enable = server_list,
             }
 
             -- Installed LSPs are configured and enabled automatically with mason-lspconfig

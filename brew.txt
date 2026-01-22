@@ -5,10 +5,12 @@ derailed/k9s/k9s
 fastfetch
 fd
 ffmpeg
+fvm
 fzf
 gh
 ghcup
 go
+grpcurl
 helm
 imagemagick
 jandedobbeleer/oh-my-posh/oh-my-posh

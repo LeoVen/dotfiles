@@ -8,7 +8,7 @@ return {
             picker = { enabled = true },
             explorer = { enabled = true },
             image = {
-                enabled = true,
+                enabled = false, -- TODO: doesn't always work and messes up HTML/Vue
             },
         },
         -- stylua: ignore start

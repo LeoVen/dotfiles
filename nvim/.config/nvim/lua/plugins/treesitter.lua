@@ -26,6 +26,7 @@ local parsers = {
     'typescript',
     'terraform',
     'vim',
+    'vue',
     'vimdoc',
     'yaml',
 }

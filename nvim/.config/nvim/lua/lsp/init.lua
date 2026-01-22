@@ -63,6 +63,7 @@ return {
                 },
 
                 marksman = {},
+                tailwindcss = {},
 
                 -- Python
                 ty = {},
@@ -96,6 +97,9 @@ return {
             for server_name, config in pairs(servers) do
                 vim.lsp.config(server_name, config)
             end
+
+            vim.lsp.enable 'dartls'
+            vim.lsp.enable 'tailwindcss'
 
             vim.diagnostic.config {
                 virtual_text = true,

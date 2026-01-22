@@ -129,6 +129,9 @@ export CARGO_BUILD_TARGET_DIR=~/.target
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
+# Flutter
+export PATH="$HOME/develop/flutter/bin:$PATH"
+
 # Aliases
 alias dc="docker compose"
 alias lg="lazygit"
@@ -149,6 +152,7 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
+# OpenTofu
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/tofu tofu
 

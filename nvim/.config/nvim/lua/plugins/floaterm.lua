@@ -10,7 +10,7 @@ return {
                     w = 80,
                 },
             }
-            vim.keymap.set({ 'n', 't' }, '\\', '<CMD>FloatermToggle<CR>', { desc = 'Floaterm Toggle' })
+            vim.keymap.set({ 'n', 't' }, '<C-\\>', '<CMD>FloatermToggle<CR>', { desc = 'Floaterm Toggle' })
         end,
     },
 }

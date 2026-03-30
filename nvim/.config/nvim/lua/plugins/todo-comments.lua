@@ -8,7 +8,8 @@ return {
             todo_comments.setup {
                 signs = false,
                 keywords = {
-                    SAFETY = { icon = ' ', color = '#ff3399' },
+                    SAFETY = { icon = ' ', color = '#7ff09d' },
+                    CONTENTION = { icon = ' ', color = '#ff3399' },
                 },
             }
 

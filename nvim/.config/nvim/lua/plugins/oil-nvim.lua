@@ -41,6 +41,7 @@ return {
                     ['gx'] = 'actions.open_external',
                     ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
                     ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
+                    ['<C-y>'] = { 'actions.yank_entry', mode = 'n' },
                     ['gd'] = {
                         desc = 'Toggle file detail view',
                         callback = function()

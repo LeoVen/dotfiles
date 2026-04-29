@@ -18,6 +18,9 @@ require 'custom.mappings'
 --  See `:help lua-guide-autocommands`
 require 'custom.autocmds'
 
+-- Load custom commands
+require 'custom.commands'
+
 -- [[ File types ]]
 -- See `:help file-types`
 require 'custom.filetype'

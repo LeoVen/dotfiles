@@ -232,6 +232,7 @@ return {
                 end,
             }
 
+            dap.configurations.c = require 'debug.c'
             dap.configurations.go = require 'debug.go'
             dap.configurations.typescript = require 'debug.typescript'
             dap.configurations.rust = require 'debug.rust'

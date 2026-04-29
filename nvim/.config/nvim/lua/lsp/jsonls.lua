@@ -1,3 +1,4 @@
+-- https://www.schemastore.org/
 return {
     filetypes = { 'json', 'jsonc' },
     settings = {

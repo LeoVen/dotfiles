@@ -89,7 +89,7 @@ bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
 # History
-HISTSIZE=10000
+HISTSIZE=100000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -155,6 +155,15 @@ compinit
 # OpenTofu
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/tofu tofu
+
+jsondiff() {
+    local tmp1=$(mktemp).json
+    local tmp2=$(mktemp).json
+    trap "rm -f '$tmp1' '$tmp2'" EXIT
+    jq -S . "$1" > "$tmp1"
+    jq -S . "$2" > "$tmp2"
+    nvim -d "$tmp1" "$tmp2"
+}
 
 # Profile zsh startup
 # Keep this at the very end of the file

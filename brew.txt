@@ -1,10 +1,12 @@
 adr-tools
 bat
 btop
+checkov
 derailed/k9s/k9s
 fastfetch
 fd
 ffmpeg
+fswatch
 fvm
 fzf
 gh
@@ -17,8 +19,11 @@ jandedobbeleer/oh-my-posh/oh-my-posh
 jq
 just
 lazygit
+libpq
+luarocks
 mermaid-cli
 minikube
+minio/stable/mc
 mongosh
 neovim
 node_exporter
@@ -33,6 +38,8 @@ redis
 resvg
 ripgrep
 sevenzip
+shellcheck
+socat
 stow
 television
 tmux

@@ -6,9 +6,9 @@ fi
 
 # Setup edit-command-line by using: Ctrl-X + Ctrl-E
 export EDITOR="nvim"
-autoload -z edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey "^X^E" edit-command-line
+bindkey '^X^E' edit-command-line
 
 # XDG configuration
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -17,12 +17,12 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # Linux
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 # MacOS
-export PATH=$PATH:/opt/homebrew/bin
-export PATH=/snap/bin/:$PATH
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
 # Haskell
-export PATH=$PATH:~/.ghcup/bin
+export PATH="$PATH:~/.ghcup/bin"
 
 # Customize prompt
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/main-diamond.yaml)"
@@ -68,8 +68,9 @@ zinit ice as'completion'; zinit snippet https://raw.githubusercontent.com/rust-l
 mkdir -p ~/.zfunc
 fpath+=~/.zfunc
 
-# TODO: this needs to run only once
-if ! [ -x "$(command -v rustup)" ]; then
+# Ensure rustup is installed and the completion file doesn't exist yet
+if command -v rustup >/dev/null 2>&1 && [ ! -f ~/.zfunc/_rustup ]; then
+  mkdir -p ~/.zfunc
   rustup completions zsh > ~/.zfunc/_rustup
 fi
 
@@ -163,6 +164,10 @@ jsondiff() {
     jq -S . "$1" > "$tmp1"
     jq -S . "$2" > "$tmp2"
     nvim -d "$tmp1" "$tmp2"
+}
+
+urlencode() {
+    python3 -c 'import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read().strip()))' <<< "$1"
 }
 
 # Profile zsh startup

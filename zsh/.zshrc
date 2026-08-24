@@ -73,10 +73,12 @@ if command -v rustup >/dev/null 2>&1 && [ ! -f ~/.zfunc/_rustup ]; then
   rustup completions zsh > ~/.zfunc/_rustup
 fi
 
+FPATH="$HOME/.docker/completions:$FPATH"
+
 # Load completions
 autoload -Uz compinit && compinit
 
-if ! type kubectl &> /dev/null; then
+if type kubectl &> /dev/null; then
   source <(kubectl completion zsh)
 fi
 
@@ -146,12 +148,6 @@ unalias gow
 zsh_stats () {
   fc -l 2 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep --color=auto -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
 }
-
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/leoven/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
 
 # OpenTofu
 autoload -U +X bashcompinit && bashcompinit

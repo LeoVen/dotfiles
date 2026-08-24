@@ -17,12 +17,15 @@ require('theme')
 -- brew install hashicorp/tap/terraform-ls
 -- brew install jq
 -- brew install lua-language-server
+-- brew install marksman
 -- brew install stylua
 -- brew install tree-sitter-cli
+-- brew install vale
 -- brew install yq
 -- cargo install taplo-cli --locked
 -- cargo install sqruff --locked
 -- go install github.com/sqls-server/sqls@latest
+-- npm install -g @tailwindcss/language-server
 -- npm install -g @vue/language-server
 -- npm install -g bash-language-server
 -- npm install -g typescript typescript-language-server
@@ -57,6 +60,10 @@ vim.pack.add({
     -- Extra editor functionality
     { src = 'https://github.com/romgrk/barbar.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
+    -- TODO: find a better terminal
+    { src = 'https://github.com/akinsho/toggleterm.nvim' },
+    { src = 'https://github.com/obsidian-nvim/obsidian.nvim' },
+    { src = 'https://github.com/qvalentin/helm-ls.nvim' },
     --
     -- Helpers
     --
@@ -96,12 +103,15 @@ vim.lsp.enable('gopls')
 vim.lsp.enable('html')
 vim.lsp.enable('jsonls')
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('marksman')
 vim.lsp.enable('rust_analyzer')
 -- vim.lsp.enable('sqls')
+vim.lsp.enable('tailwindcss')
 vim.lsp.enable('terraformls')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('ty')
 vim.lsp.enable('vue_ls')
 vim.lsp.enable('yamlls')
+vim.lsp.enable('helm_ls')
 
 require('vim._core.ui2').enable()

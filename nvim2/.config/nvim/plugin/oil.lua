@@ -1,5 +1,7 @@
 vim.keymap.set('n', '-', '<cmd>Oil --float<cr>', { desc = 'Open Oil' })
 
+local detail = false
+
 require('mini.icons').setup()
 require('oil').setup({
     columns = {

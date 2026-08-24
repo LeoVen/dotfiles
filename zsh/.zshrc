@@ -8,7 +8,6 @@ fi
 export EDITOR="nvim"
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey '^X^E' edit-command-line
 
 # XDG configuration
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -39,7 +38,7 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-if [ command -v vivid &>/dev/null ]; then
+if command -v vivid &>/dev/null; then
   export LS_COLORS="$(vivid generate catppuccin-mocha)"
 fi
 
@@ -85,6 +84,7 @@ zinit cdreplay -q
 
 # Keybindings
 bindkey -e
+bindkey '^X^E' edit-command-line
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
@@ -169,6 +169,9 @@ jsondiff() {
 urlencode() {
     python3 -c 'import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read().strip()))' <<< "$1"
 }
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH"
 
 # Profile zsh startup
 # Keep this at the very end of the file

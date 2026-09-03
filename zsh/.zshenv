@@ -27,7 +27,7 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 # Flutter
-export PATH="$HOME/develop/flutter/bin:$PATH"
+export PATH="$HOME/fvm/default/bin:$PATH"
 
 # libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

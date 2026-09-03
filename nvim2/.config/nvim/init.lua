@@ -16,6 +16,7 @@ require('theme')
 --
 -- brew install hashicorp/tap/terraform-ls
 -- brew install jq
+-- brew install fvm
 -- brew install lua-language-server
 -- brew install marksman
 -- brew install stylua
@@ -64,6 +65,8 @@ vim.pack.add({
     { src = 'https://github.com/akinsho/toggleterm.nvim' },
     { src = 'https://github.com/obsidian-nvim/obsidian.nvim' },
     { src = 'https://github.com/qvalentin/helm-ls.nvim' },
+    { src = 'https://github.com/nvim-lua/plenary.nvim' },
+    { src = 'https://github.com/nvim-flutter/flutter-tools.nvim' }, -- depends on plenary
     --
     -- Helpers
     --
@@ -115,3 +118,4 @@ vim.lsp.enable('yamlls')
 vim.lsp.enable('helm_ls')
 
 require('vim._core.ui2').enable()
+require('flutter-tools').setup({})

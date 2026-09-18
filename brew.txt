@@ -11,6 +11,7 @@ fvm
 fzf
 gh
 ghcup
+glow
 go
 grpcurl
 helm

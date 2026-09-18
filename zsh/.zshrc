@@ -24,6 +24,9 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+# Disable terminal flow control (Ctrl-S/Ctrl-Q) (tmux compat)
+stty -ixon
+
 # Shell integrations
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"

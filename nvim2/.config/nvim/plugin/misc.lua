@@ -1,7 +1,12 @@
+-- I prefer this gc/gcc than neovim's default as it keeps the cursors' position
 require('Comment').setup()
+
 require('nvim-autopairs').setup()
+
 require('fidget').setup({})
+
 require('ibl').setup()
+
 require('quicker').setup({
     keys = {
         {
@@ -43,3 +48,5 @@ require('lazydev').setup({
         },
     },
 })
+
+require('flutter-tools').setup({})

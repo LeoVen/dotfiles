@@ -118,4 +118,3 @@ vim.lsp.enable('yamlls')
 vim.lsp.enable('helm_ls')
 
 require('vim._core.ui2').enable()
-require('flutter-tools').setup({})

@@ -62,6 +62,6 @@ In case of a phrase with multiple words, they are put together with a single hyp
 
 ### See Also
 
-- https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_02
+- https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html
 - http://docopt.org/
 

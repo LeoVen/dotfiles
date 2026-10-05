@@ -49,6 +49,7 @@ local parsers = {
     'dockerfile',
     'gitignore',
     'go',
+    'haskell',
     'gomod',
     'gosum',
     'hcl',

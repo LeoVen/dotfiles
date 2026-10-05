@@ -25,12 +25,12 @@ require('theme')
 -- brew install yq
 -- cargo install taplo-cli --locked
 -- cargo install sqruff --locked
+-- ghcup install hls
 -- go install github.com/sqls-server/sqls@latest
 -- npm install -g @tailwindcss/language-server
 -- npm install -g @vue/language-server
 -- npm install -g bash-language-server
 -- npm install -g typescript typescript-language-server
--- npm install -g vscode-json-languageserver
 -- npm install -g vscode-langservers-extracted # html, css, json, etc
 -- npm install -g yaml-language-server
 -- rustup component add rust-analyzer
@@ -59,6 +59,7 @@ vim.pack.add({
     { src = 'https://github.com/kdheepak/lazygit.nvim' },
     --
     -- Extra editor functionality
+    { src = 'https://github.com/sindrets/diffview.nvim' },
     { src = 'https://github.com/romgrk/barbar.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
     -- TODO: find a better terminal
@@ -116,5 +117,6 @@ vim.lsp.enable('ty')
 vim.lsp.enable('vue_ls')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('helm_ls')
+vim.lsp.enable('hls')
 
 require('vim._core.ui2').enable()

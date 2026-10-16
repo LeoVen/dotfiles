@@ -33,6 +33,7 @@ require('theme')
 -- npm install -g typescript typescript-language-server
 -- npm install -g vscode-langservers-extracted # html, css, json, etc
 -- npm install -g yaml-language-server
+-- npm install -g @mermaid-js/mermaid-cli
 -- rustup component add rust-analyzer
 -- uv tool install ruff@latest
 -- uv tool install ty@latest

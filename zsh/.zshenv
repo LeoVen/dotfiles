@@ -20,7 +20,7 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # Haskell
-export PATH="$PATH:~/.ghcup/bin"
+export PATH="$PATH:$HOME/.ghcup/bin"
 
 # Go
 export GOPATH="$HOME/go"

@@ -22,7 +22,11 @@ cheat() {
   fi
 
   _glow() {
-    glow -w 0 -p "$@"
+    if [ -f ~/.config/glow/catppuccin-mocha.json ]; then
+      PAGER="less -XR" glow -w 0 --style ~/.config/glow/catppuccin-mocha.json -p "$@"
+    else
+      PAGER="less -XR" glow -w 0 -p "$@"
+    fi
   }
 
   local file="${XDG_CONFIG_HOME:-$HOME/.config}/cheats/${1}.md"

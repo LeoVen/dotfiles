@@ -33,6 +33,9 @@ vim.api.nvim_create_user_command('RenderMermaid', function()
     -- Restore register 'z' back to its original state
     vim.fn.setreg('z', reg_save, regtype_save)
 
+    -- If I don't select the diagram line-by-line, I usually vi` and this tag ends up being added
+    selection = selection:gsub('^%s*mermaid%s*\n', '', 1)
+
     if not selection or selection:match('^%s*$') then
         vim.notify('Error: No visual selection found or selection is empty.', vim.log.levels.WARN)
         return

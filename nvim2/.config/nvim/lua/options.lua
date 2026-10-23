@@ -75,3 +75,5 @@ vim.o.conceallevel = 1
 
 -- Set highlight on search
 vim.opt.hlsearch = true
+
+vim.opt.guicursor = 'a:block'

@@ -1,3 +1,7 @@
+local function journal_id()
+    return os.date('%G-W%V')
+end
+
 require('obsidian').setup({
     ui = {
         -- Use render-markdown instead
@@ -19,15 +23,19 @@ require('obsidian').setup({
     templates = {
         folder = '_templates',
         substitutions = {
-            journalTitle = function(_)
-                return '' .. os.date('%Y-W%V', os.time())
-            end,
+            journalTitle = journal_id,
             date = function(_)
                 return '' .. os.date('%Y-%m-%d', os.time())
             end,
         },
         date_format = '',
         time_format = '',
+        customizations = {
+            journal = {
+                notes_subdir = '01_Journal/' .. os.date('%G'),
+                note_id_func = journal_id,
+            },
+        },
     },
     callbacks = {
         enter_note = function(_)

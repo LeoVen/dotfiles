@@ -5,11 +5,11 @@ show_hidden = true
 edit = [{ run = 'nvim "$@"', for = "unix", block = true }]
 
 [[plugin.prepend_fetchers]]
-id = "git"
-name = "*"
+url = "*"
 run = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
-id = "git"
-name = "*/"
+url = "*/"
 run = "git"
+group = "git"

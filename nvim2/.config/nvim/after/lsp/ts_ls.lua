@@ -14,10 +14,17 @@ local vue_plugin = {
     configNamespace = 'typescript',
 }
 
+-- TypeScript 7 (native Go port) ships no tsserver.js, so fall back to a TS 6 install
+-- npm install --prefix ~/.local/share/typescript6 typescript@6
+local tsserver_fallback_path = vim.fn.expand('~/.local/share/typescript6/node_modules/typescript/lib')
+
 return {
     init_options = {
         plugins = {
             vue_plugin,
+        },
+        tsserver = {
+            fallbackPath = tsserver_fallback_path,
         },
     },
     filetypes = file_types,

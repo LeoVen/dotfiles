@@ -31,6 +31,7 @@ require('theme')
 -- npm install -g @vue/language-server
 -- npm install -g bash-language-server
 -- npm install -g typescript typescript-language-server
+-- npm install --prefix ~/.local/share/typescript6 typescript@6 # tsserver fallback for TS 7 projects
 -- npm install -g vscode-langservers-extracted # html, css, json, etc
 -- npm install -g yaml-language-server
 -- npm install -g @mermaid-js/mermaid-cli

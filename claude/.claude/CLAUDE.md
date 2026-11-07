@@ -1,14 +1,8 @@
-# CLAUDE.md
-
-## Language
-
-- Avoid mannerisms
-
-## Text
+## Writing
 
 - Avoid Emojis, invisible or zero-width spaces
-- Avoid non-ASCII punctuation: —, “, ”, ‘, ’, ✔, ✗
-- Prefer ASCII: -, ", ', x
+- Avoid non-ASCII punctuation. For example: —, “, ”, ‘, ’, ✔, ✗
+- Prefer ASCII. For example: -, ", ', x
 
 ## Code
 
